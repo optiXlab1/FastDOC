@@ -171,10 +171,8 @@ def main():
                 index
             )
 
-            # 设置子图标题并放在下方
             axs[index].set_title(titles[index], fontsize=18, pad=-20, y=-0.3)
 
-            # 设置边框宽度为1.5
             for spine in axs[index].spines.values():
                 spine.set_linewidth(1.5)
 
