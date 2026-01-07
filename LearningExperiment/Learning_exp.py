@@ -165,14 +165,12 @@ def mpc_rollout(
     has_a = 'a' in vehicle_data.columns
 
     if not has_a:
-        # 如果没有 a 列，就用有限差分算 a
         v = vehicle_data['v'].to_numpy()
         a = np.zeros_like(v)
         a[1:] = np.diff(v) / dt
         vehicle_data['a'] = a
         print("[info] 'a' not found in vehicle_csv, computed from velocity difference.")
-
-    # 现在可以安全地读取所有列
+        
     cols = ['x', 'y', 'phi', 'v', 'a', 'delta']
     i = int(start_index)
     xk = vehicle_data.loc[i, cols].to_numpy(float)
