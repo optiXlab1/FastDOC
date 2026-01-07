@@ -30,13 +30,13 @@ os.makedirs(RESULT_DIR, exist_ok=True)
 def plot_losses(npz_path: str, out_svg: str = None):
     """Plot loss curves (FastDOC/FastDOC, IDOC, PDP) from saved NPZ, save as SVG (2.0x2.0)."""
     z = np.load(npz_path, allow_pickle=True)
-    loss_FastDOC = z["loss_FastDOC"]   # 你 npz 里用的是 FastDOC，这里标签写 FastDOC
+    loss_FastDOC = z["loss_FastDOC"]
     loss_IDOC    = z["loss_IDOC"]
     loss_SafePDP     = z["loss_SafePDP"]
 
-    COLOR_OUR  = "#d62728"  # 红
-    COLOR_IDOC = "#1f77b4"  # 蓝
-    COLOR_PDP  = "#f1c40f"  # 黄
+    COLOR_OUR  = "#d62728"
+    COLOR_IDOC = "#1f77b4"
+    COLOR_PDP  = "#f1c40f"
     LS_SOLID   = "-"
     LS_DASH    = "--"
 
@@ -78,11 +78,9 @@ def plot_time_bars(npz_path: str, out_svg: str = None):
     methods = ["FastDOC", "IDOC", "SafePDP"]
     COLORS = {"FastDOC": "#CA0E12", "IDOC": "#25377F", "SafePDP": "#F6BD12"}
 
-    # 转换为毫秒
     build_avg = np.array([float(z[f"build_time_avg_{m}"]) * 1e3 for m in methods])
     solve_avg = np.array([float(z[f"solve_time_avg_{m}"]) * 1e3 for m in methods])
-
-    # 构造横坐标：左为Build，右为Solve
+    
     n_methods = len(methods)
     width = 0.95  # more wide
     group_gap = 1
